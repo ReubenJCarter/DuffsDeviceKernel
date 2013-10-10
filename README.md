@@ -1,4 +1,4 @@
-ProtothreadKernel
+DuffsDeviceKernel
 =================
 
-A simple kernel and protothread implementation
+A simple kernel and duff's device implementation
