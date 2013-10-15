@@ -5,6 +5,43 @@ Process process[MAX_PROCESS_NUMBER];
 unsigned int processNumber;
 unsigned int schedulerIndex;
 
+int StreamRead(void* fData, unsigned int fSize, unsigned int fCount, Stream* fStream)
+{
+	unsigned int i = 0;
+	while(i < fCount * fSize)
+	{
+		while(*fStream->size <= 0)
+		{
+			
+		}
+		((char*)fData)[i] = ((char*)fStream->data)[*fStream->size - 1];
+		(*fStream->size)--;
+		i++;
+	}
+}
+
+int StreamWrite(void* fData, unsigned int fSize, unsigned int fCount, Stream* fStream)
+{
+	int i = fCount * fSize - 1;
+	while(i >= 0)
+	{
+		((char*)(fStream->data))[*(fStream->size)] = ((char*)fData)[i];
+		(*(fStream->size))++;
+		i--;
+	}
+}
+
+int StreamOpen(void* fBuffer, unsigned int* fSize, Stream* fStream)
+{
+	fStream->data = fBuffer;
+	fStream->size = fSize;
+}
+
+int StreamFlush(Stream* fStream)
+{
+	*fStream->size = 0;
+}
+
 void InitKernel()
 {
   currentActiveProcessIndex = 0;
@@ -67,6 +104,11 @@ void KillProcess(unsigned int fProcessId)
 {
   process[fProcessId].state = P_DEAD;
   processNumber--;
+}
+
+Process* GetProcess(unsigned int fProcessId)
+{
+	return &process[fProcessId];
 }
 
 unsigned int GetAtiveProcessIndex()

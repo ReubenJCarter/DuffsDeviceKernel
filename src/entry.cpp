@@ -1,5 +1,5 @@
 #include "kernel.h"
-#include <stdio.h>
+#include "emulationPort.h"
 
 int A()
 {
@@ -8,7 +8,7 @@ int A()
   while(1)
   {
 	PBREAK;
-    printf("hello world\n");
+    StreamWrite((char*)"hello, ", 7, 1, &(p->stdOut));
   }
   
   PEND;
@@ -21,7 +21,7 @@ int B()
   while(1)
   {
 	PBREAK;
-    printf("Hi!\n");
+	StreamWrite((char*)"test\n", 5, 1, &(p->stdOut));
   }
   
   PEND;
@@ -30,8 +30,11 @@ int B()
 int main()
 {
   InitKernel();
-  AddProcess(A);
-  AddProcess(B);
+  AddProcess(EmulationPort);
+  unsigned int a = AddProcess(A);
+  unsigned int b = AddProcess(B);
+  EmulationPortConnectStream(&GetProcess(a)->stdIn, &GetProcess(a)->stdOut);
+  EmulationPortConnectStream(&GetProcess(b)->stdIn, &GetProcess(b)->stdOut);
   Scheduler();
   return 0;
 }

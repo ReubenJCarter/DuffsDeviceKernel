@@ -12,22 +12,35 @@
 #define P_DEAD 3
 #define P_START 4
 
-typedef int (*ProcessMain)();
+typedef struct _stream
+{
+  void* data;
+  unsigned int* size;
+}Stream;
 
+int StreamRead(void* fData, unsigned int fSize, unsigned int fCount, Stream* fStream);
+int StreamWrite(void* fData, unsigned int fSize, unsigned int fCount, Stream* fStream);
+int StreamOpen(void* fBuffer, unsigned int* fSize, Stream* fStream);
+int Flush(Stream* fStream);
+
+typedef int (*ProcessMain)();
 typedef struct _process
 {
   unsigned char state;
   unsigned int codePosition;
   ProcessMain processMain;
+  Stream stdIn;
+  Stream stdOut;
 }Process;
 
 void InitKernel();
 unsigned int AddProcess(ProcessMain fMain);
 unsigned int AddProcessPaused(ProcessMain fMain);
-void RestartProcess(Process* fProcess);
-void PauseProcess(Process* fProcess);
-void ResumeProcess(Process* fProcess);
-void KillProcess(Process* fProcess);
+void RestartProcess(unsigned int fProcessId);
+void PauseProcess(unsigned int fProcessId);
+void ResumeProcess(unsigned int fProcessId);
+void KillProcess(unsigned int fProcessId);
+Process* GetProcess(unsigned int fProcessId);
 unsigned int GetAtiveProcessIndex();
 Process* GetAtiveProcessPtr();
 void Scheduler();
