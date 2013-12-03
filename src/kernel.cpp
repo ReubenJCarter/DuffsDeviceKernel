@@ -5,30 +5,32 @@ Process process[MAX_PROCESS_NUMBER];
 unsigned int processNumber;
 unsigned int schedulerIndex;
 
-int StreamRead(void* fData, unsigned int fSize, unsigned int fCount, Stream* fStream)
+unsigned int StreamRead(void* fData, unsigned int fSize, unsigned int fCount, Stream* fStream)
 {
 	unsigned int i = 0;
 	while(i < fCount * fSize)
 	{
-		while(*fStream->size <= 0)
-		{
-			
-		}
+		if(*fStream->size <= 0)
+			break;
 		((char*)fData)[i] = ((char*)fStream->data)[*(fStream->size) - 1];
 		(*fStream->size)--;
 		i++;
 	}
+	return i;
 }
 
-int StreamWrite(void* fData, unsigned int fSize, unsigned int fCount, Stream* fStream)
+unsigned int StreamWrite(void* fData, unsigned int fSize, unsigned int fCount, Stream* fStream)
 {
 	int i = fCount * fSize - 1;
+	unsigned int j = 0;
 	while(i >= 0)
 	{
 		((char*)(fStream->data))[*(fStream->size)] = ((char*)fData)[i];
 		(*(fStream->size))++;
 		i--;
+		j++;
 	}
+	return j;
 }
 
 int StreamBind(void* fBuffer, unsigned int* fSize, Stream* fStream)

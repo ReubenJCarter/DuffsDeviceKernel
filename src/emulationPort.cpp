@@ -8,10 +8,8 @@ unsigned int sizeOut;
 
 void EmulationPortConnectStream(Stream* fStreamIn, Stream* fStreamOut)
 {
-	fStreamIn->data = bufferIn;
-	fStreamOut->data = bufferOut;
-	fStreamIn->size = &sizeIn;
-	fStreamOut->size = &sizeOut;
+	StreamBind((char*)bufferIn, &sizeIn, fStreamIn);
+	StreamBind((char*)bufferOut, &sizeOut, fStreamOut);
 }
 
 int EmulationPort()

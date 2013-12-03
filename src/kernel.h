@@ -18,8 +18,8 @@ typedef struct _stream
   unsigned int* size;
 }Stream;
 
-int StreamRead(void* fData, unsigned int fSize, unsigned int fCount, Stream* fStream);
-int StreamWrite(void* fData, unsigned int fSize, unsigned int fCount, Stream* fStream);
+unsigned int StreamRead(void* fData, unsigned int fSize, unsigned int fCount, Stream* fStream);
+unsigned int StreamWrite(void* fData, unsigned int fSize, unsigned int fCount, Stream* fStream);
 int StreamBind(void* fBuffer, unsigned int* fSize, Stream* fStream);
 int Flush(Stream* fStream);
 
