@@ -14,7 +14,7 @@ int StreamRead(void* fData, unsigned int fSize, unsigned int fCount, Stream* fSt
 		{
 			
 		}
-		((char*)fData)[i] = ((char*)fStream->data)[*fStream->size - 1];
+		((char*)fData)[i] = ((char*)fStream->data)[*(fStream->size) - 1];
 		(*fStream->size)--;
 		i++;
 	}
@@ -31,7 +31,7 @@ int StreamWrite(void* fData, unsigned int fSize, unsigned int fCount, Stream* fS
 	}
 }
 
-int StreamOpen(void* fBuffer, unsigned int* fSize, Stream* fStream)
+int StreamBind(void* fBuffer, unsigned int* fSize, Stream* fStream)
 {
 	fStream->data = fBuffer;
 	fStream->size = fSize;
