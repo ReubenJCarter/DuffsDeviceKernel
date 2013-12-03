@@ -33,8 +33,8 @@ int main()
   AddProcess(EmulationPort);
   unsigned int a = AddProcess(A);
   unsigned int b = AddProcess(B);
-  EmulationPortConnectStream(&GetProcess(a)->stdIn, &GetProcess(a)->stdOut);
-  EmulationPortConnectStream(&GetProcess(b)->stdIn, &GetProcess(b)->stdOut);
+  EmulationPortBindStream(&GetProcess(a)->stdIn, &GetProcess(a)->stdOut);
+  EmulationPortBindStream(&GetProcess(b)->stdIn, &GetProcess(b)->stdOut);
   Scheduler();
   return 0;
 }

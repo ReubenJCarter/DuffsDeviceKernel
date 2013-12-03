@@ -5,7 +5,7 @@
 
 #define EMPORT_BUFFERSIZE 20
 
-void EmulationPortConnectStream(Stream* fStreamIn, Stream* fStreamOut);
+void EmulationPortBindStream(Stream* fStreamIn, Stream* fStreamOut);
 int EmulationPort();
 
 #endif

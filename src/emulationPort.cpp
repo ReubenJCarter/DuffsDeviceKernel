@@ -6,7 +6,7 @@ char bufferOut[20];
 unsigned int sizeIn;
 unsigned int sizeOut;
 
-void EmulationPortConnectStream(Stream* fStreamIn, Stream* fStreamOut)
+void EmulationPortBindStream(Stream* fStreamIn, Stream* fStreamOut)
 {
 	StreamBind((char*)bufferIn, &sizeIn, fStreamIn);
 	StreamBind((char*)bufferOut, &sizeOut, fStreamOut);
@@ -28,17 +28,6 @@ int EmulationPort()
 		sizeOut--;
 		putchar(bufferOut[sizeOut]);
 	}
-	/*
-    while(1)
-	{
-		int c = getchar();
-		printf("v");
-		if(c == EOF || sizeIn >= EMPORT_BUFFERSIZE)
-			break;
-		else
-			bufferIn[sizeIn] = c;
-		sizeIn++;
-	}*/
   }
   
   PEND;
