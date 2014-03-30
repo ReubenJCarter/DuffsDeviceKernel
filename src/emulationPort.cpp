@@ -21,7 +21,7 @@ int EmulationPort()
   
   while(1)
   {
-	PBREAK;
+	PBLOCK;
 	unsigned int i = 0;
     while(sizeOut > 0)
 	{

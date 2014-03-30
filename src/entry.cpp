@@ -7,7 +7,7 @@ int A()
   
   while(1)
   {
-	PBREAK;
+	PBLOCK;
     StreamWrite((char*)"hello, ", 7, 1, &(p->stdOut));
   }
   
@@ -20,7 +20,7 @@ int B()
   
   while(1)
   {
-	PBREAK;
+	PBLOCK;
 	StreamWrite((char*)"test\n", 5, 1, &(p->stdOut));
   }
   

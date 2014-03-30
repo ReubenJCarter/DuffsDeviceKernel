@@ -3,7 +3,7 @@
 
 #define MAX_PROCESS_NUMBER 10
 #define PSTART Process* p=GetAtiveProcessPtr(); switch(p->codePosition) { case 0:
-#define PBREAK do { p->codePosition=__LINE__; return 0; case __LINE__:; } while (0)
+#define PBLOCK do { p->codePosition=__LINE__; return 0; case __LINE__:; } while (0)
 #define PEND }
 
 #define P_ACTIVE 0
